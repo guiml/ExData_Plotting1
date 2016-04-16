@@ -22,16 +22,21 @@ power_comp_data <- data.table(power_comp_data)
 ###### SUBSET BY DAYS 01 and 02 of feb 2007
 ##############################################
 #*According to the Brazilian standard time
+
 df <- power_comp_data[power_comp_data$FormatedDate == "2007-02-01"| power_comp_data$FormatedDate == "2007-02-02"]
 
+
+##############################################
+###### SET VALUES AS NUMERIC AND MERGE DATE AND TIME
+##############################################
+
 library(datasets)
-
-
 df$Global_active_power <- as.numeric(df$Global_active_power)
 df$DateTime <- as.POSIXct(paste(df$FormatedDate, df$Time), format="%Y-%m-%d %H:%M:%S")
 
-
-
+##############################################
+###### GENERATE PLOT
+##############################################
 
 png(filename="graphs/plot2.png")
 plot(df$DateTime, df$Global_active_power,  type = "l", col = "blue", ylab = "Global Active Power (kilowatts)", xlab=" ",main = "Global Active Power by day")

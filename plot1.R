@@ -24,15 +24,17 @@ power_comp_data <- data.table(power_comp_data)
 #*According to the Brazilian standard time
 df <- power_comp_data[power_comp_data$FormatedDate == "2007-02-01"| power_comp_data$FormatedDate == "2007-02-02"]
 
-
-##subsets<-split(df, df$Global_active_power, drop=TRUE)
-
+##############################################
+###### SET VALUES AS NUMERIC
+##############################################
 
 library(datasets)
-
-
 df$GApower <- as.numeric(df$Global_active_power)
 
+
+##############################################
+###### GENERATE HISTOGRAM
+##############################################
 
 png(filename="graphs/plot1.png")
 hist(df$GApower, col="yellow", main="Global Active Power", xlab="Global Active Power (kilowatts)") 

@@ -24,14 +24,18 @@ power_comp_data <- data.table(power_comp_data)
 #*According to the Brazilian standard time
 df <- power_comp_data[power_comp_data$FormatedDate == "2007-02-01"| power_comp_data$FormatedDate == "2007-02-02"]
 
+
+##############################################
+###### SET VALUES AS NUMERIC AND MERGE DATE AND TIME
+##############################################
 library(datasets)
-
-
 df$Global_active_power <- as.numeric(df$Global_active_power)
 df$DateTime <- as.POSIXct(paste(df$FormatedDate, df$Time), format="%Y-%m-%d %H:%M:%S")
 
 
-
+##############################################
+###### GENERATE MULTIPLE PLOTS 
+##############################################
 
 png(filename="graphs/plot4.png")
 par(mfrow = c(2,2))

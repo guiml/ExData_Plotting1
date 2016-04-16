@@ -22,15 +22,21 @@ power_comp_data <- data.table(power_comp_data)
 ###### SUBSET BY DAYS 01 and 02 of feb 2007
 ##############################################
 #*According to the Brazilian standard time
+
 df <- power_comp_data[power_comp_data$FormatedDate == "2007-02-01"| power_comp_data$FormatedDate == "2007-02-02"]
 
+
+##############################################
+###### MERGE DATE AND TIME
+##############################################
+
 library(datasets)
-
-
-df$Global_active_power <- as.numeric(df$Global_active_power)/1000
 df$DateTime <- as.POSIXct(paste(df$FormatedDate, df$Time), format="%Y-%m-%d %H:%M:%S")
 
 
+##############################################
+###### GENERATE MULTIPLE AXES PLOTS WITH LEGEND
+##############################################
 
 png(filename="graphs/plot3.png")
 plot(df$DateTime, df$Sub_metering_1 ,  type = "l", col = "black", ylab = "Energy Sub Meetering", xlab=" ", ylim=c(0, 40))
